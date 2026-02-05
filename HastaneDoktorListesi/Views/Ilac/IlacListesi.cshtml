@@ -1,0 +1,43 @@
+﻿@model List<HastaneBilgiListeleri.Models.Ilac>
+
+<div class="hospital-nav-bar shadow-sm">
+    <a asp-controller="Doktor" asp-action="DoktorlarListesi" class="nav-quick-link"><i class="fas fa-user-md"></i> Doktorlar</a>
+    <a asp-controller="Hasta" asp-action="HastaListesi" class="nav-quick-link"><i class="fas fa-user-injured"></i> Hastalar</a>
+    <a asp-controller="Hastalik" asp-action="HastalıkListesi" class="nav-quick-link"><i class="fas fa-microscope"></i> Hastalıklar</a>
+    <a asp-controller="Ilac" asp-action="IlacListesi" class="nav-quick-link"><i class="fas fa-pills"></i> İlaçlar</a>
+</div>
+<div class="hospital-container">
+    <div class="hospital-card">
+        <div class="hospital-card-header d-flex justify-content-between align-items-center" style="background-color: #f8f9fa;">
+            <div style="text-align: left;">
+                <h3><i class="fas fa-pills"></i> İlaç Envanteri</h3>
+                <p>Sistemde tanımlı olan tüm tıbbi ilaçların listesi.</p>
+            </div>
+            <a asp-action="IlacEkle" class="btn-hospital" style="width: auto; padding: 10px 25px;">✚ Yeni İlaç Ekle</a>
+        </div>
+
+        <table class="table-custom">
+            <thead>
+                <tr>
+                    <th style="width: 120px;">İlaç No</th>
+                    <th>İlaç Ticari Adı</th>
+                    <th class="text-center">Yönetim</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="doctor-row">
+                        <td class="fw-bold text-muted">#@item.IlacID</td>
+                        <td class="fw-bold" style="color: #004085;">@item.IlacAd</td>
+                        <td class="text-center">
+                            <a asp-action="IlacGuncelle" asp-route-id="@item.IlacID" class="text-primary me-3">Düzenle</a>
+                            <a asp-action="IlacSil" asp-route-id="@item.IlacID" class="text-danger"
+                               onclick="return confirm('@item.IlacAd envanterden silinecek. Emin misiniz?')">Sil</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

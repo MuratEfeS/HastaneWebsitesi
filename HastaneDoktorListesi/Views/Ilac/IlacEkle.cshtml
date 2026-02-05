@@ -1,0 +1,23 @@
+﻿@model HastaneBilgiListeleri.Models.Ilac
+
+<div class="hospital-container">
+    <div class="hospital-card shadow">
+        <div class="hospital-card-header">
+            <i class="medical-icon">💊</i>
+            <h3>Yeni İlaç Kaydı</h3>
+            <p>Eczane birimine yeni ilaç tanımlamak için adı giriniz.</p>
+        </div>
+
+        <form method="post" asp-action="IlacEkle" class="hospital-form p-4">
+            <div class="mb-4">
+                <label asp-for="IlacAd" class="form-label fw-bold">İlaç Adı</label>
+                <input asp-for="IlacAd" class="form-control" placeholder="Örn: Parasetamol, Amoksisilin..." required />
+            </div>
+
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn-save-main flex-grow-1">İlacı Tanımla</button>
+                <a asp-action="IlacListesi" class="btn-cancel flex-grow-1 text-center">İptal ve Listeye Dön</a>
+            </div>
+        </form>
+    </div>
+</div>

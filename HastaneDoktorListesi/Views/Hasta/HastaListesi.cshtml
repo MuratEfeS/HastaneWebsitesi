@@ -1,0 +1,66 @@
+﻿@using HastaneDoktorListesi.Models
+@model List<Hasta>
+
+@{
+    ViewData["Title"] = "Hasta Listesi";
+}
+<div class="hospital-nav-bar shadow-sm">
+    <a asp-controller="Doktor" asp-action="DoktorlarListesi" class="nav-quick-link"><i class="fas fa-user-md"></i> Doktorlar</a>
+    <a asp-controller="Hasta" asp-action="HastaListesi" class="nav-quick-link"><i class="fas fa-user-injured"></i> Hastalar</a>
+    <a asp-controller="Hastalik" asp-action="HastalıkListesi" class="nav-quick-link"><i class="fas fa-microscope"></i> Hastalıklar</a>
+    <a asp-controller="Ilac" asp-action="IlacListesi" class="nav-quick-link"><i class="fas fa-pills"></i> İlaçlar</a>
+</div>
+<div class="hospital-container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="hospital-header patient-header">✚ Kayıtlı Hasta Listesi</h2>
+        <a asp-action="HastaEkle" class="btn btn-primary shadow-sm">Yeni Hasta Kaydı</a>
+    </div>
+
+    <table class="table-custom">
+        <thead>
+            <tr>
+                <th>Profil</th>
+                <th>Hasta Adı</th>
+                <th>Hastalığı</th>
+                <th>Atanmış Doktor</th>
+                <th class="text-center">İşlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Count > 0)
+            {
+                @foreach (var item in Model)
+                {
+                    <tr class="patient-row">
+                        <td>
+                            <img src="~/HastaProfilePic/@item.HastaProfilResmi" class="patient-img" />
+                        </td>
+                        <td class="align-middle fw-bold">@item.HastaAd</td>
+                        <td><span class="badge bg-light text-dark border">@item.Hastalık?.HastalikAd</span></td>
+                        <td class="align-middle">
+                            @if (item.Doktor != null)
+                            {
+                                <span class="doctor-badge">Dr. @item.Doktor.DoktorAdi</span>
+                            }
+                            else
+                            {
+                                <span class="text-muted"><i>Doktor Atanmadı</i></span>
+                            }
+                        </td>
+                        <td class="text-center align-middle">
+                            <a asp-action="HastaGuncelle" asp-route-id="@item.HastaID" class="text-warning mx-2">Düzenle</a>
+                            <a asp-action="HastaSil" asp-route-id="@item.HastaID" class="text-danger mx-2"
+                                               onclick="return confirm('@item.HastaAd isimli hastayı silmek istediğinize emin misiniz?')">Sil</a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="4" class="text-center py-4 text-muted">Sistemde henüz kayıtlı hasta bulunmamaktadır.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

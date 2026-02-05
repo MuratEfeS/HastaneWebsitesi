@@ -1,0 +1,32 @@
+﻿@model List<Doktor>
+<div class="hospital-nav-bar shadow-sm">
+    <a asp-controller="Doktor" asp-action="DoktorlarListesi" class="nav-quick-link"><i class="fas fa-user-md"></i> Doktorlar</a>
+    <a asp-controller="Hasta" asp-action="HastaListesi" class="nav-quick-link"><i class="fas fa-user-injured"></i> Hastalar</a>
+    <a asp-controller="Hastalik" asp-action="HastalıkListesi" class="nav-quick-link"><i class="fas fa-microscope"></i> Hastalıklar</a>
+    <a asp-controller="Ilac" asp-action="IlacListesi" class="nav-quick-link"><i class="fas fa-pills"></i> İlaçlar</a>
+</div>
+<div class="hospital-container">
+    <div class="d-flex justify-content-between">
+        <h2 class="hospital-header">Doktor Listesi</h2>
+        <a asp-action="DoktorEkle" class="btn btn-primary">Yeni Ekle</a>
+    </div>
+    <table class="table-custom">
+        <thead>
+            <tr> <th>Profil</th> <th>Ad Soyad</th> <th>Ünvan</th> <th>İşlemler</th> </tr>
+        </thead>
+        <tbody>
+            @foreach (var d in Model)
+            {
+                <tr>
+                    <td><img src="~/DoktorProfilePic/@d.DoktorProfilResmi" class="doctor-thumb" /></td>
+                    <td>@d.DoktorAdi</td>
+                    <td>@d.DoktorÜnvan</td>
+                    <td>
+                        <a asp-action="DoktorDuzenle" asp-route-id="@d.DoktorID" class="text-warning">Düzenle</a> |
+                        <a asp-action="DoktorSil" asp-route-id="@d.DoktorID" class="text-danger" onclick="return confirm('Silinsin mi?')">Sil</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

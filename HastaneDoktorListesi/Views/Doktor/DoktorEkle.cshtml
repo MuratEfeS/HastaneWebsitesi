@@ -1,0 +1,47 @@
+﻿@using HastaneDoktorListesi.ViewModels
+@model DoktorEkle_VM
+
+<div class="hospital-card">
+    <div class="hospital-card-header">
+        <i class="medical-icon">✚</i>
+        <h2>Doktor Kayıt Paneli</h2>
+        <p>Lütfen yeni doktor bilgilerini eksiksiz giriniz.</p>
+    </div>
+
+    <form method="post" asp-action="DoktorEkle" enctype="multipart/form-data" class="hospital-form">
+        <div class="input-group">
+            <label asp-for="DoktorAdi">Tam Adı ve Soyadı</label>
+            <input asp-for="DoktorAdi" placeholder="Örn: Dr. Ahmet Yılmaz" />
+        </div>
+
+        <div class="input-group">
+            <label asp-for="DoktorÜnvan">Tıbbi Ünvan</label>
+            <select asp-for="DoktorÜnvan">
+                <option value="" disabled selected>Ünvan Seçiniz...</option>
+                <option value="Pratisyen Hekim">Pratisyen Hekim</option>
+                <option value="Uzman Doktor">Uzman Doktor</option>
+                <option value="Operatör Doktor">Operatör Doktor</option>
+                <option value="Yardımcı Doçent">Yardımcı Doçent</option>
+                <option value="Doçent Doktor">Doçent Doktor</option>
+                <option value="Profesör Doktor">Profesör Doktor</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label asp-for="DoktorProfilResmi">Profil Fotoğrafı</label>
+            <div class="file-upload-wrapper">
+                <input type="file" asp-for="DoktorProfilResmi" />
+                <small>PNG veya JPG (Maks. 2MB)</small>
+            </div>
+        </div>
+
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn-hospital">
+                <span>Sisteme Kaydet</span>
+            </button>
+            <a asp-action="DoktorlarListesi" class="btn-cancel text-center" style="text-decoration:none; display:block; margin-top:10px; color:#666; font-size:0.9rem;">
+                ✕ Vazgeç ve Listeye Dön
+            </a>
+        </div>
+    </form>
+</div>

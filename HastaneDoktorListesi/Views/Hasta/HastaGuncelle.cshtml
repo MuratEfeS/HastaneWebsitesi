@@ -1,0 +1,53 @@
+﻿@using HastaneDoktorListesi.ViewModels
+@model HastaEkle_VM
+
+<div class="hospital-container">
+    <div class="hospital-card shadow">
+        <div class="hospital-card-header">
+            <h3><i class="fas fa-user-edit"></i> Hasta Bilgilerini Güncelle</h3>
+            <p>Hastanın doktor veya teşhis bilgilerini buradan değiştirebilirsiniz.</p>
+        </div>
+
+        <form method="post" asp-action="HastaGuncelle" enctype="multipart/form-data" class="hospital-form p-4">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <input type="hidden" asp-for="HastaID" />
+
+            <div class="mb-3">
+                <label asp-for="HastaAd" class="form-label fw-bold">Hasta Adı Soyadı</label>
+                <input asp-for="HastaAd" class="form-control" placeholder="Ad Soyad..." required />
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="DoktorID" class="form-label fw-bold">Sorumlu Doktor</label>
+                    <select asp-for="DoktorID" asp-items="Model.DoktorListesi" class="form-select" required>
+                        <option value="" disabled>Doktor Değiştir...</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="HastalıkID" class="form-label fw-bold">Teşhis / Hastalık</label>
+                    <select asp-for="HastalıkID" asp-items="Model.HastalikListesi" class="form-select" required>
+                        <option value="" disabled>Hastalık Güncelle...</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label asp-for="HastaProfilResmi" class="form-label fw-bold">Profil Fotoğrafını Güncelle</label>
+                <input type="file" asp-for="HastaProfilResmi" class="form-control" accept="image/*" />
+                <small class="text-muted">Mevcut resmi değiştirmek istemiyorsanız bu alanı boş bırakın.</small>
+            </div>
+
+            <div class="d-flex gap-2 pt-3">
+                <button type="submit" class="btn-save-main flex-grow-1">
+                    <i class="fas fa-save"></i> Değişiklikleri Sisteme Kaydet
+                </button>
+                <a asp-action="HastaListesi" class="btn btn-cancel flex-grow-1 text-center">
+                    Vazgeç ve Geri Dön
+                </a>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+﻿@using HastaneDoktorListesi.ViewModels
+@model DoktorEkle_VM
+
+<div class="hospital-container">
+    <div class="hospital-card shadow">
+        <h3 class="hospital-header">Doktor Düzenle</h3>
+        <form asp-action="DoktorDuzenle" method="post" enctype="multipart/form-data" class="p-4">
+            <input type="hidden" asp-for="DoktorID" />
+            <div class="mb-3">
+                <label class="form-label fw-bold">Doktor Adı</label>
+                <input asp-for="DoktorAdi" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-bold">Ünvan</label>
+                <select asp-for="DoktorÜnvan" class="form-select">
+                    <option value="" disabled>Ünvan Seçiniz...</option>
+                    <option value="Pratisyen Hekim">Pratisyen Hekim</option>
+                    <option value="Uzman Doktor">Uzman Doktor</option>
+                    <option value="Operatör Doktor">Operatör Doktor</option>
+                    <option value="Yardımcı Doçent">Yardımcı Doçent</option>
+                    <option value="Doçent Doktor">Doçent Doktor</option>
+                    <option value="Profesör Doktor">Profesör Doktor</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-bold">Yeni Resim Seç</label>
+                <input type="file" asp-for="DoktorProfilResmi" class="form-control" />
+            </div>
+
+            <div class="d-flex gap-2 pt-3">
+                <button type="submit" class="btn-save-main flex-grow-1">Değişiklikleri Kaydet</button>
+                <a asp-action="DoktorlarListesi" class="btn btn-light border flex-grow-1 text-center" style="padding:12px; border-radius:8px; text-decoration:none; color:#333;">
+                    İptal / Geri Dön
+                </a>
+            </div>
+        </form>
+    </div>
+</div>

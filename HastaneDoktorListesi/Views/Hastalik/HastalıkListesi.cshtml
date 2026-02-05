@@ -1,0 +1,57 @@
+﻿@model List<HastaneBilgiListeleri.Models.Hastalik>
+
+<div class="hospital-nav-bar shadow-sm">
+    <a asp-controller="Doktor" asp-action="DoktorlarListesi" class="nav-quick-link"><i class="fas fa-user-md"></i> Doktorlar</a>
+    <a asp-controller="Hasta" asp-action="HastaListesi" class="nav-quick-link"><i class="fas fa-user-injured"></i> Hastalar</a>
+    <a asp-controller="Hastalik" asp-action="HastalıkListesi" class="nav-quick-link"><i class="fas fa-microscope"></i> Hastalıklar</a>
+    <a asp-controller="Ilac" asp-action="IlacListesi" class="nav-quick-link"><i class="fas fa-pills"></i> İlaçlar</a>
+</div>
+<div class="hospital-container">
+    <div class="hospital-card">
+        <div class="hospital-card-header d-flex justify-content-between align-items-center" style="background-color: #f1f5f9; text-align: left;">
+            <div>
+                <h3><i class="fas fa-microscope"></i> Hastalık ve Tedavi Listesi</h3>
+                <p>Sistemdeki tüm teşhis tanımları ve atanan ilaçlar.</p>
+            </div>
+            <a asp-action="HastalıkEkle" class="btn-hospital" style="width: auto; padding: 10px 25px;">✚ Yeni Hastalık</a>
+        </div>
+
+        <table class="table-custom">
+            <thead>
+                <tr>
+                    <th style="width: 100px;">ID</th>
+                    <th>Hastalık Adı</th>
+                    <th>Önerilen İlaç</th>
+                    <th class="text-center">İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="doctor-row">
+                        <td class="text-muted">#@item.HastalikID</td>
+
+                        <td class="fw-bold" style="color: #004085;">@item.HastalikAd</td>
+
+                        <td>
+                           
+                                <span class="doctor-badge">💊 @item.Ilac.IlacAd</span>
+                        
+                        </td>
+
+                        <td class="text-center">
+                            <a asp-action="HastalıkGüncelle" asp-route-id="@item.HastalikID" class="text-primary me-2" style="text-decoration:none; font-weight:600;">
+                                Düzenle
+                            </a>
+                            <span class="text-muted">|</span>
+                            <a asp-action="HastalıkSil" asp-route-id="@item.HastalikID" class="text-danger ms-2" style="text-decoration:none; font-weight:600;"
+                               onclick="return confirm('@item.HastalikAd silinecek. Emin misiniz?')">
+                                Sil
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
